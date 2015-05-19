@@ -27,20 +27,16 @@ var list = document.getElementById("movielist");
 var create = function(elem){
   var img = document.createElement("img");
   img.className="unselected";
-  //var li = document.createElement("li");
+ 
   var button = document.createElement("Button");
-  //var p = document.createElement("p");
+
   var div = document.createElement("div");
   div.className="movie";
   var button = document.createElement("button");
-  //h2.className="button";
+
   //each list item contains a image and title of movie
   list.appendChild(div);
-  //li.appendChild(button);
-  //button.appendChild(div);
   div.appendChild(img);
-  //div.appendChild(button);
-  //div.appendChild(p);
   div.appendChild(button);
 
 
@@ -66,17 +62,17 @@ var create = function(elem){
    posterdiv.appendChild(director);
    posterdiv.appendChild(actor);
 
-   var input = elem;
+   var input = elem; //
    var url_safe = encodeURI(input);
    var url = "http://omdbapi.com/?t=" + url_safe; //link to info(part of api)
-   var xhr = new XMLHttpRequest();
+   var xhr = new XMLHttpRequest(); //get the request
 
-   xhr.open("GET", url); //"get" will get from url
-   xhr.addEventListener('load', function(e){ //ready for event listener
+   xhr.open("GET", url); //"get" will get from url , open up the request from xhr.
+   xhr.addEventListener('load', function(e){ //ready for event listener , will load it after we the request. (e)is stand for event.  
      var data = xhr.responseText; //***automatically JSON stringified***
      var parsed = JSON.parse(data); // **MUST parse information because of JSON**
-     console.log(parsed);
-     imges.src = parsed.Poster;
+     console.log(parsed); // object you see on the web browser dev tool.
+     imges.src = parsed.Poster; // this is the way of you accessing the information of the object. 
      title.innerHTML = "Movie: " + parsed.Title;
      year.innerHTML = "Year: " + parsed.Year;
      director.innerHTML = "Director: " + parsed.Director;
@@ -97,21 +93,9 @@ var create = function(elem){
     var data = xhr.responseText; //***automatically JSON stringified***
     var parsed = JSON.parse(data); // **MUST parse information because of JSON**
     console.log(parsed);
-    //var img = document.querySelector("img");
     img.src = parsed.Poster;
-
-    //var header = document.querySelector("h1");
     button.innerHTML = parsed.Title;
-    //header.innerHTML = "Movie: " + parsed.Title;
-    //var director = document.querySelector("#director");
-    //director.innerHTML = "Director: " + parsed.Director;
 
-    //var subheader = document.querySelector("#date");
-    //subheader.innerHTML = "Rleased: " + parsed.Released;
-
-    //var subheader1 = document.querySelector("#rating");
-    //subheader1.innerHTML = "Rating: " + parsed.imdbRating;
-    //input.value = " "; //form dosen't like me, so used " " to clear input
   })
   xhr.send();
 }
